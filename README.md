@@ -1,16 +1,70 @@
-## Micronaut 2.4.1 Documentation
+## Desafio Mercado Livre - Orange Talents ( versão em Kotlin e Micronaut)
 
-- [User Guide](https://docs.micronaut.io/2.4.1/guide/index.html)
-- [API Reference](https://docs.micronaut.io/2.4.1/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/2.4.1/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
 
-## Feature http-client documentation
+### Endpoints
+> [cadastro de produto] - requer autenticação básica com usuário(email) e senha
+``` bash
+curl --request POST \
+  --url http://localhost:8080/api/produtos \
+  --header 'Authorization: Basic dGVzdGVAaG90bWFpbC5jb206c2VuaGExMjM0NQ==' \
+  --header 'Content-Type: application/json' \
+  --cookie JSESSIONID=59CFC4CB8BDFE91EC57EBC4CBAAE58AC \
+  --data '{
+	"nome" : "Celular",
+	"valor" : 2500,
+	"quantidade" : 5,
+	"descricao" : "Celular seminovo, caiu no vaso só 2 vezes",
+	"categoria" : 1,
+	"caracteristica" :[
+		{
+			"marca" : "sansung",
+			"modelo" : "A10",
+			"unidades" : 2
+		},
+		{
+			"marca" : "motorola",
+			"modelo" : "moto g",
+			"unidades" : 4
+		},
+		{
+			"marca" : "Apple",
+			"modelo" : "iphone 9",
+			"unidades" : 2
+		}
+	]
+}'
 
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+```
+> [cadastro de usuário] 
+```bash
+curl --request POST \
+  --url http://localhost:8080/api/usuarios \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"email" : "johndoe@gmail.com.br",
+	"password" : "senha1234"
+}'
+```
+>[cadastro de categorias]
+```bash
+curl --request POST \
+  --url http://localhost:8080/api/categorias \
+  --header 'Authorization: Basic dGVzdGVAaG90bWFpbC5jb206c2VuaGExMjM0NQ==' \
+  --header 'Content-Type: application/json' \
+  --cookie JSESSIONID=59CFC4CB8BDFE91EC57EBC4CBAAE58AC \
+  --data '{
+	"nome" : "Eletrônicos"
+}'
+```
+```bash
 
-## Feature jdbc-hikari documentation
-
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
-
+curl --request POST \
+  --url http://localhost:8080/api/categorias \
+  --header 'Authorization: Basic dGVzdGVAaG90bWFpbC5jb206c2VuaGExMjM0NQ==' \
+  --header 'Content-Type: application/json' \
+  --cookie JSESSIONID=59CFC4CB8BDFE91EC57EBC4CBAAE58AC \
+  --data '{
+	"nome" : "Celular",
+	"categoriaId": 1
+}'
+```
