@@ -1,5 +1,6 @@
 package com.orange.usuario
 
+import com.nimbusds.jose.proc.SecurityContext
 import com.orange.security.BcriptService
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpResponse.badRequest
@@ -8,6 +9,7 @@ import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Post
 import io.micronaut.security.annotation.Secured
+import io.micronaut.security.authentication.Authentication
 import io.micronaut.security.rules.SecurityRule
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
@@ -23,6 +25,7 @@ class UsuarioController(private val usuarioRepository: UsuarioRepository) {
 
     @Post("/usuarios")
     fun novoUsuario(@Body @Valid request: UsuarioRequest): HttpResponse<Any>{
+
         val validateUser = usuarioRepository.findByEmail(request.email)
         if(validateUser.isPresent) return badRequest("Não foi possível realizar o cadastro com o email informado")
         val usuario = usuarioRepository.save(request.toModel(cripto))

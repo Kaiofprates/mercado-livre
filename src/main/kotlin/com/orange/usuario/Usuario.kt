@@ -4,13 +4,11 @@ import io.micronaut.core.annotation.Introspected
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Introspected
 @Entity
+@Table(name = "usuario")
 data class Usuario(
 
     val email: String,
