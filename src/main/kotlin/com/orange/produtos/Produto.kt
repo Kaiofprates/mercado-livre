@@ -16,13 +16,18 @@ data class Produto(
     val descricao: String,
     @OneToOne
     val categoria: Categoria,
-    @ManyToMany(mappedBy = "produto", cascade = arrayOf(CascadeType.PERSIST))
+    @ManyToMany(mappedBy = "produto", cascade = arrayOf(CascadeType.PERSIST), fetch = FetchType.EAGER)
     val caracteristica: List<Caracteristica>,
     @ManyToOne
     val usuario: Usuario,
-    val criadoEm: LocalDateTime
+    val criadoEm: LocalDateTime,
+    var imagens: ArrayList<String> = ArrayList()
 
 ){
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+
+    fun adicionaImagem(imagem: String){
+        imagens?.add(imagem)
+    }
 }
